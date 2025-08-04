@@ -12,17 +12,12 @@ const { registerNewUser, loginUser, userData, handleProperty } = require("../con
 const upload = require("../config/multer");
 
 
-
-
 router.post("/register", registerNewUser);
 
 router.post("/login", loginUser);
 
 //route for user
 router.get("/me", protect, userData);
-
-router.post("/properties",protect, checkRole("ADMIN"), upload.single("propertyImg")
-, handleProperty);
 
 router.get("/admin-only",protect, checkRole("ADMIN"), (req , res)=>{
   res.send("Hello Admin");

@@ -57,23 +57,10 @@ async function userData(req , res) {
     res.status(500).json({msg:"server Error"})
   } 
 }
-async function handleProperty(req, res) {
-  const{title,discription,price,location} = req.body
-  const property = new Property({
-    title,
-    discription,
-    price,
-    location,
-    propertyImg:req.file.filename,
-    createdBy: req.user._id,
-  })
-  await property.save();
-  res.status(201).json({msg: "property created", property})
-}
+
 
 module.exports = {
     registerNewUser,
     loginUser,
     userData,
-    handleProperty
 }
