@@ -1,12 +1,4 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-
-const User = require("../models/user");
-const {createToken} = require("../services/authantication")
-const protect = require("../middlewares/auth")
-const checkRole = require("../middlewares/role");
 const Property = require("../models/property");
-
 
 async function handleProperty(req, res) {
   try {
