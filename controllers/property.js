@@ -27,8 +27,33 @@ async function handleProperty(req, res) {
     console.log("Uploaded file info:", req.file);
     res.status(500).json({msg:"Server Error"})
   }
+};
+
+async function getPropertyById(req, res) {
+    try {
+        const property = await Property.findById(req.params.id).populate("createdBy", "fullName email");
+        if(!property) return res.status(400).json({msg: "property not found"});
+        res.json(property);
+        
+    } catch (error) {
+     
+        res.status(500).json({msg:"Server Error"})
+    }
+}   
+async function deleteProperty(req , res) {
+    try {
+        const property = await Property.findByIdAndDelete(req.params.id);
+    if (!property) return  res.status(400).json({msg:"Property not found"});
+    res.json(property);
+    } catch (error) {
+           console.error(error)
+        res.status(500).json({msg:"Server Error"});
+    }
+    
 }
 
 module.exports = {
-    handleProperty
+    handleProperty,
+    getPropertyById,
+    deleteProperty
 }
