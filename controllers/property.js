@@ -29,6 +29,28 @@ async function handleProperty(req, res) {
   }
 };
 
+async function getAllProperties(req , res) {
+    try {
+        const{location, minPrice, maxPrice, page = 1, limit=10} = req.query;
+        const query = {};
+        if(location) query.location = location;
+        if(minPrice || maxPrice){
+            query.price = {};
+            if (minPrice) query.price.$gte = Number(minPrice);
+            if(maxPrice) query.price.$lte = Number(maxPrice);
+        }
+
+        //pagination
+        const skip = (Number(page)-1) * Number(limit);
+        const properties = await Property.find(query).populate("createdBy", "fullName email").sort({createdAt: -1}).skip(skip).limit(Number(limit));
+        res.status(200).json(properties);
+        
+    } catch (error) {
+        res.status(500).json({msg:"Server Error"})
+    }
+    
+}
+
 async function getPropertyById(req, res) {
     try {
         const property = await Property.findById(req.params.id).populate("createdBy", "fullName email");
@@ -55,5 +77,6 @@ async function deleteProperty(req , res) {
 module.exports = {
     handleProperty,
     getPropertyById,
-    deleteProperty
+    deleteProperty,
+    getAllProperties,
 }
