@@ -1,9 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const {connectMongoDb} = require("./connection");
-const authRouter = require("./routes/auth")
+
+const authRouter = require("./routes/auth");
 const propertyRoutes = require("./routes/property");
-const publicRoutes = require("./routes/public")
+const publicRoutes = require("./routes/public");
+const userRoutes = require("./routes/user");
 
 
 dotenv.config();
@@ -14,6 +16,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api", propertyRoutes );
 app.use("/api", publicRoutes);
+app.user("api/users", userRoutes)
 
 app.get("/", (req,res)=>{
     res.send("lets start ")
