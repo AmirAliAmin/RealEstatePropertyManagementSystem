@@ -1,4 +1,3 @@
-const { use } = require("react");
 const User = require("../models/user");
 
 async function getUser(req ,res) {
