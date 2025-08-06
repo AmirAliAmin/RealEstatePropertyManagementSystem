@@ -6,6 +6,7 @@ const authRouter = require("./routes/auth");
 const propertyRoutes = require("./routes/property");
 const publicRoutes = require("./routes/public");
 const userRoutes = require("./routes/user");
+const SalemanRoutes = require("./routes/saleman")
 
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use("/api/auth", authRouter);
 app.use("/api", propertyRoutes );
 app.use("/api", publicRoutes);
 app.use("/api/users", userRoutes)
+app.use("/api/salesmen", SalemanRoutes)
 
 app.get("/", (req,res)=>{
     res.send("lets start ")
