@@ -87,7 +87,7 @@ async function updateProperty(req, res) {
     if (req.file) {
       req.body.propertyImg = req.file.filename;
     }
-    const update = await property.findByIdAndUpdate(id, req.body, {
+    const update = await Property.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     res.json({ msg: "Property Updated", property: update });

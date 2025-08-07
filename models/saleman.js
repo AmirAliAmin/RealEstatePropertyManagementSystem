@@ -11,7 +11,7 @@ const salemanSchema = new Schema({
         unquie: true
     },
     phone:{
-        phone: Number,
+        phone: String,
         createdBy:{
             type: Date,
             default: Date.now

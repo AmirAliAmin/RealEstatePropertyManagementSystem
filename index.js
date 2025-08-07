@@ -1,24 +1,30 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const {connectMongoDb} = require("./connection");
+const helmet = require("helmet");
+
+
 
 const authRouter = require("./routes/auth");
 const propertyRoutes = require("./routes/property");
 const publicRoutes = require("./routes/public");
 const userRoutes = require("./routes/user");
 const SalemanRoutes = require("./routes/saleman")
+const inquiryRoutes = require("./routes/inquiry")
 
 
 dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
+app.use(helmet());
 
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api", propertyRoutes );
 app.use("/api", publicRoutes);
-app.use("/api/users", userRoutes)
-app.use("/api/salesmen", SalemanRoutes)
+app.use("/api/users", userRoutes);
+app.use("/api/salesmen", SalemanRoutes);
+app.use("api/inquiries", inquiryRoutes);
 
 app.get("/", (req,res)=>{
     res.send("lets start ")
