@@ -6,7 +6,7 @@
     const upload = require("../config/multer");
 
 
-    router.post("/properties",protect, checkRole("ADMIN"), upload.single("propertyImg")
+    router.post("/properties",protect, checkRole("SALESMAN"), upload.single("propertyImg")
     , handleProperty);
 
     router.delete("/properties/:id", protect, checkRole("ADMIN"),deleteProperty)

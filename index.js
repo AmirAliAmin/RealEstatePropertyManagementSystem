@@ -24,7 +24,7 @@ app.use("/api", propertyRoutes );
 app.use("/api", publicRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/salesmen", SalemanRoutes);
-app.use("api/inquiries", inquiryRoutes);
+app.use("/api/inquiries", inquiryRoutes);
 
 app.get("/", (req,res)=>{
     res.send("lets start ")
