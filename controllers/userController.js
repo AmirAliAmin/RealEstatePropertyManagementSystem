@@ -13,7 +13,7 @@ async function getUserById(req ,res) {
     try {
         const {id} = req.params;
         const user = await User.findById(id).select("-password");
-        if (!user) return res.status(403).jason("User is not Found")
+        if (!user) return res.status(403).json("User is not Found")
         res.json(user)
         
     } catch (error) {
@@ -26,7 +26,7 @@ async function deleteUser(req ,res) {
     try {
         const {id} = req.params;
         const user = await User.findByIdAndDelete(id);
-         if (!user) return res.status(403).jason("User is not Found")
+         if (!user) return res.status(403).json("User is not Found")
         res.json({msg:"User Deleted Successfully"})
 
     } catch (error) {
