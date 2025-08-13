@@ -2,6 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const {connectMongoDb} = require("./connection");
 const helmet = require("helmet");
+const cors = require("cors");
+const path = require("path");
+
 
 
 
@@ -17,6 +20,7 @@ dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
+app.use(cors()); 
 
 app.use(express.json());
 app.use("/api/auth", authRouter);
