@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../assets/Logo.png";
-import signupbg from "../assets/login-bg.png";
+import logo from "../../assets/Logo.png";
+import signupbg from "../../assets/login-bg.png";
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
@@ -67,8 +67,6 @@ export default function SignupPage() {
           </div>
         </div>
       </div>
-      {/* */}
-      {/* */}
     </>
   );
 }

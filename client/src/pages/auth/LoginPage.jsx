@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import loginbg from "../assets/signup-bg.png";
-import logo from "../assets/Logo.png";
+import loginbg from "../../assets/signup-bg.png";
+import logo from "../../assets/Logo.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 export default function LoginPage() {
