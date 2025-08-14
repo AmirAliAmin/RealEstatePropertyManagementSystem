@@ -1,5 +1,6 @@
-import { Children, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { registerUser, loginUser, adminLogin } from "../api/authApi";
+
 
 export const AuthContext = createContext();
 
@@ -13,10 +14,15 @@ export const AuthProvider = ({ children }) => {
     const storedToken = localStorage.getItem("token");
 
     if (storedToken && storedUser) {
-      setUser(JSON.parse(storedUser));
+      try {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
       setToken(storedToken);
+    } catch (err) {
+      console.error("Error parsing stored user:", err);
+      localStorage.removeItem("user"); // clean up bad data
     }
-
+  }
     setLoading(false);
   }, []);
 

@@ -1,10 +1,36 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import loginbg from "../../assets/signup-bg.png";
 import logo from "../../assets/Logo.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../../context/AuthContext";
+import {useNavigate} from 'react-router-dom'
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { handleLogin } = useContext(AuthContext);
+
+  const navigate = useNavigate()
+  
+
+  const onSubmit = async(e)=>{
+    e.preventDefault();
+    try {
+      const data = await handleLogin({email, password})
+      navigate("/home")
+    } catch (error) {
+      alert("invalid")
+
+      
+    }
+
+  }
+  
+  const goToSignin = ()=>{
+    navigate("/signup")
+  }
+
 
   return (
     <div
@@ -22,13 +48,13 @@ export default function LoginPage() {
             className="sm:h-[300px] sm:w-[10%] w-[30%] object-contain"
           />
           <h1 className="w-[50%] sm:w-[30%] text-[10px] sm:text-[15px] flex items-center justify-center sm:font-semibold">
-            New to SASHA? Create an Account
+            New to SASHA? <span className="cursor-pointer hover:underline" onClick={goToSignin}> Create an Account </span> 
           </h1>
         </div>
 
       
         <div className="sm:w-[50%] mx-auto sm:px-20 px-10">
-          <form>
+          <form onSubmit={onSubmit}>
             <h1 className="mb-5 sm:mx-40 mx-20 font-extrabold text-[35px]">
               Welcome
             </h1>
@@ -39,16 +65,18 @@ export default function LoginPage() {
               name="email"
               id="email"
               placeholder="Enter Email"
+              value={email}
+              onChange={(e)=>setEmail(e.target.value)}
               className="w-full h-15 mb-5 border px-5 bg-black bg-opacity-50 outline-none focus:outline-none"
             />
-
-          
             <div className="relative mb-5">
               <input
                 type={showPassword ? "text" : "password"}
                 name="password"
                 id="password"
                 placeholder="Enter Password"
+                value={password}
+                onChange={(e)=>setPassword(e.target.value)}
                 className="w-full h-15 border px-5 bg-black bg-opacity-50 outline-none focus:outline-none"
               />
               <button

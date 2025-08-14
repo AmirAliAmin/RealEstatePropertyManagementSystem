@@ -4,11 +4,18 @@ import signupbg from "../../assets/login-bg.png";
 import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
+    const navigate = useNavigate()
+
+    const goToLogin =()=>{
+      navigate("/")
+    }
   return (
     <>
       <div
@@ -47,7 +54,7 @@ export default function SignupPage() {
                   placeholder="Enter Password"
                    className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
-                <button type="button" onClick={()=> setShowPassword(!showPassword)} className="absolute top-245 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
+                <button type="button" onClick={()=> setShowPassword(!showPassword)} className="absolute top-100 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
                 <input
                   type={showConfirmPassword ? "text" : "password"}
                   name="password"
@@ -55,11 +62,11 @@ export default function SignupPage() {
                   placeholder="Confirm Password"
                 className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
-                <button type="button" onClick={()=> setShowConfirmPassword(!showConfirmPassword)} className="absolute top-263 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showConfirmPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
+                <button type="button" onClick={()=> setShowConfirmPassword(!showConfirmPassword)} className="absolute top-117 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showConfirmPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
               </div>
               <div className="flex">
               <button type="submit" className="w-50 h-15 bg-[linear-gradient(to_right,#482B5C,#812244,#D30C1C)]">Get Started</button>
-              <h1 className="mx-5 w-50">Already have an account? <span className="mb-5 cursor-pointer hover:underline font-bold">Login</span></h1>
+              <h1 className="mx-5 w-50">Already have an account? <span className="mb-5 cursor-pointer hover:underline font-bold" onClick={goToLogin}>Login</span></h1>
               </div>
               <div>
               </div>
