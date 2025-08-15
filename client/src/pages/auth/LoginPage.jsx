@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import loginbg from "../../assets/signup-bg.png";
 import logo from "../../assets/Logo.png";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -9,10 +9,15 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, handleLogout } = useContext(AuthContext);
 
   const navigate = useNavigate()
-  
+   
+  useEffect(() => {
+    // Auto logout when landing on login page
+    localStorage.removeItem("token");
+  }, []);
+
 
   const onSubmit = async(e)=>{
     e.preventDefault();

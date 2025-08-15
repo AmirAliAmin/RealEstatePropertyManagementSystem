@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext,useContext, useState, useEffect } from "react";
 import { registerUser, loginUser, adminLogin } from "../api/authApi";
 
 
@@ -71,4 +71,9 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

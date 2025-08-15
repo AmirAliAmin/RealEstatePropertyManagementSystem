@@ -5,16 +5,29 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import {useAuth} from '../../context/AuthContext'
 
 
 export default function SignupPage() {
     const [showPassword, setShowPassword] = useState(false)
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const{handleRegister} = useAuth();
+    const [formData, setFormData] = useState({FullName:"", email:"", password:""})
 
     const navigate = useNavigate()
 
     const goToLogin =()=>{
       navigate("/")
+    }
+
+    const handleChange = (e)=>{
+      setFormData({...formData, [e.target.name]: e.target.value})
+
+    }
+
+    const handleSubmit = async(e)=>{
+      e.preventDefult();
+      await handleRegister(formData);
     }
   return (
     <>
@@ -31,13 +44,14 @@ export default function SignupPage() {
              Your dream home is one click away.
             </h1>
 
-            <form action="" method="">
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-wrap">
                 <input
                   type="text"
                   name="fullName"
                   id="fullName"
                   placeholder="Enter Name "
+                  onChange={handleChange}
                   className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
                 <input
@@ -45,6 +59,7 @@ export default function SignupPage() {
                   name="email"
                   id="email"
                   placeholder="Enter Email"
+                  onChange={handleChange}
                    className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
                 <input
@@ -52,6 +67,7 @@ export default function SignupPage() {
                   name="password"
                   id="password"
                   placeholder="Enter Password"
+                  onChange={handleChange}
                    className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
                 <button type="button" onClick={()=> setShowPassword(!showPassword)} className="absolute top-100 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
@@ -60,6 +76,7 @@ export default function SignupPage() {
                   name="password"
                   id="confirmPassword"
                   placeholder="Confirm Password"
+                  onChange={handleChange}
                 className="w-100 h-15 sm:mb-3 mb-5 border px-5 bg-black opacity-50 outline-none focus:outline-none"
                 />
                 <button type="button" onClick={()=> setShowConfirmPassword(!showConfirmPassword)} className="absolute top-117 left-100 -translate-y-1/2 text-gray-500 hover:text-gray-700">{showConfirmPassword? <FaRegEye /> : <FaRegEyeSlash /> }</button>
