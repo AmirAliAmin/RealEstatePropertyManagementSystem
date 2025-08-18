@@ -39,7 +39,7 @@ export default function Navbar() {
   }, []);
   return (
     <div>
-      <div className="hidden lg:flex w-full h-18 border gap-5">
+      <div className="hidden lg:flex w-full h-18 fixed border gap-5 bg-black text-white">
         <div className="flex p-5 w-[15%]">
           <h1 className="font-extrabold text-[20px]">Amir Ali</h1>
         </div>
