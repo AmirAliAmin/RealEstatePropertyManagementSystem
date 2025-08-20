@@ -21,8 +21,12 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cors()); 
-
 app.use(express.json());
+
+// Serve uploaded images
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+
 app.use("/api/auth", authRouter);
 app.use("/api", propertyRoutes );
 app.use("/api", publicRoutes);
