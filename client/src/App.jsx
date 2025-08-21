@@ -8,6 +8,8 @@ import About from "./pages/user/About";
 import Layout from "./components/layout";
 
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import AdminLogin from "./pages/auth/AdminLogin";
+import Dashboard from "./pages/Admin/Dashboard";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/admin" element={<AdminLogin/>}/>
+        <Route path="/admin/dashboard" element={<Dashboard/>}/>
         <Route
           path="/home"
           element={
