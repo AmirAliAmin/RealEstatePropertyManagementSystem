@@ -33,9 +33,35 @@ async function deleteUser(req ,res) {
         res.status(500).json({msg:"Server Error"})
     }   
 }
+async function updateUserRole(req, res) {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+
+    // only allow updating role to "user" or "salesman"
+    if (!["user", "salesman"].includes(role)) {
+      return res.status(400).json({ msg: "Invalid role. Only 'user' or 'salesman' are allowed." });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      id,
+      { role },
+      { new: true }
+    ).select("-password");
+
+    if (!user) return res.status(404).json({ msg: "User not found" });
+
+    res.json({ msg: "Role updated successfully", user });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Server Error" });
+  }
+}
+
 
 module.exports = {
     getUser,
     getUserById,
-    deleteUser
+    deleteUser,
+    updateUserRole
 }

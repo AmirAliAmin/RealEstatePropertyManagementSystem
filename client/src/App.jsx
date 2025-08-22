@@ -10,6 +10,7 @@ import Layout from "./components/layout";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import AdminLogin from "./pages/auth/AdminLogin";
 import Dashboard from "./pages/Admin/Dashboard";
+import AdminRoute from "./components/AdminRoutes";
 
 function App() {
   return (
@@ -17,37 +18,49 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/admin" element={<AdminLogin/>}/>
-        <Route path="/admin/dashboard" element={<Dashboard/>}/>
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <Dashboard />
+            </AdminRoute>
+          }
+        />
         <Route
           path="/home"
           element={
             <ProtectedRoutes>
               <Layout>
-              <Home />
+                <Home />
               </Layout>
             </ProtectedRoutes>
           }
         />
-        <Route path="about" element={
-          <ProtectedRoutes>
-            <Layout>
-            <About />
-            </Layout>
-          </ProtectedRoutes>
-        } 
-          />
-        <Route path="propertyList" element={
-          <ProtectedRoutes>
-            <Layout>
-            <PropertyList />
-            </Layout>
-          </ProtectedRoutes>
-          } />
+        <Route
+          path="about"
+          element={
+            <ProtectedRoutes>
+              <Layout>
+                <About />
+              </Layout>
+            </ProtectedRoutes>
+          }
+        />
+        <Route
+          path="propertyList"
+          element={
+            <ProtectedRoutes>
+              <Layout>
+                <PropertyList />
+              </Layout>
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
     </Router>
   );
 }
-
 
 export default App;

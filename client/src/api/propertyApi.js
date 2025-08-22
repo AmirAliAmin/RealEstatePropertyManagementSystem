@@ -1,10 +1,7 @@
-// propertyApi.js
 import api from "./axios";
 
 export const createProperty = async (data) => {
-  const res = await api.post("/properties", data, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const res = await api.post("/properties", data);
   return res.data;
 };
 
@@ -19,9 +16,7 @@ export const getPropertyById = async (id) => {
 };
 
 export const updateProperty = async (id, data) => {
-  const res = await api.patch(`/properties/${id}`, data, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  const res = await api.patch(`/properties/${id}`, data);
   return res.data;
 };
 

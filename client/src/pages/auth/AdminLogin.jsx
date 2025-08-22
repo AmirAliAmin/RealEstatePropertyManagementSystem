@@ -17,21 +17,22 @@ const { handleAdminLogin } = useContext(AuthContext);
     localStorage.removeItem("token");
   }, []);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-     const { user } = await handleAdminLogin({ email, password });
+const onSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const data = await handleAdminLogin({ email, password });
 
-      // ✅ Check if user is admin
-      if (data?.user?.role === "ADMIN") {
-        navigate("/admin/dashboard");
-      } else {
-        alert("You are not authorized as admin!");
-      }
-    } catch (error) {
-      alert("Invalid email or password");
+    if (data.user?.role === "ADMIN") {
+      navigate("/admin/dashboard"); // ✅ only go if role is ADMIN
+    } else {
+      alert("You are not authorized as admin!");
     }
-  };
+  } catch (error) {
+    alert("Invalid email or password");
+  }
+};
+
+
 
   return (
     <div

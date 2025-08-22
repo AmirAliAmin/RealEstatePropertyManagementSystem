@@ -13,5 +13,4 @@ export const loginUser = async (data) => {
 export const adminLogin = async (data) => {
     const res = await api.post("/auth/admin-login", data);
     return res.data
-    
 }

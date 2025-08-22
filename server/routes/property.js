@@ -1,16 +1,29 @@
-    const express = require("express");
-    const router = express.Router();
-    const {handleProperty, deleteProperty, updateProperty} = require("../controllers/property")
-    const protect = require("../middlewares/auth")
-    const checkRole = require("../middlewares/role");
-    const upload = require("../config/multer");
+const express = require("express");
+const router = express.Router();
+const {
+  handleProperty,
+  deleteProperty,
+  updateProperty,
+  getAllProperties,
+  getPropertyById,
+} = require("../controllers/property");
 
+const protect = require("../middlewares/auth");
+const upload = require("../config/multer");
 
-    router.post("/properties",protect, checkRole("SALESMAN"), upload.single("propertyImg")
-    , handleProperty);
+// Create property
+router.post("/properties", protect, upload.single("propertyImg"), handleProperty);
 
-    router.delete("/properties/:id", protect, checkRole("ADMIN"),deleteProperty)
+// Get all
+router.get("/properties", getAllProperties);
 
-    router.patch("/properties/:id", protect, checkRole("ADMIN", "SALESMAN"), upload.single("propertyImg"), updateProperty)
+// Get by ID
+router.get("/properties/:id", getPropertyById);
 
-    module.exports = router;
+// Update property
+router.patch("/properties/:id", protect, upload.single("propertyImg"), updateProperty);
+
+// Delete property
+router.delete("/properties/:id", protect, deleteProperty);
+
+module.exports = router;

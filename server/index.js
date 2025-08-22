@@ -20,7 +20,11 @@ dotenv.config();
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(helmet());
-app.use(cors()); 
+app.use(cors({
+  origin: "http://localhost:5173",  // your frontend URL
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Serve uploaded images

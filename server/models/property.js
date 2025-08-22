@@ -1,4 +1,4 @@
-const { Schema, model, Types } = require('mongoose');
+const { Schema, model, Types,mongoose } = require('mongoose');
 
 const propertySchema = new Schema({
   title: {
@@ -23,10 +23,10 @@ const propertySchema = new Schema({
   },
   propertyImg: {
     type: String,
-    required: true
+    // required: true
   },
   createdBy: {
-    type: Types.ObjectId,  
+    type: mongoose.Schema.Types.ObjectId, 
     ref: "User",          
     required: true
   },
